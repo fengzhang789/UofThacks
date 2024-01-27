@@ -1,0 +1,26 @@
+.bg_bottle{
+    background: url(../../assets/images/bottle_bg.png);
+    background-size: cover;
+    position: fixed;
+    margin-bottom: 15%;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+}
+
+
+.waterbottle{
+    width: 1600px; 
+    height: auto;
+    border-radius: 2rem;
+    overflow: hidden;
+    transform: translateY(150px) rotate(45deg);
+    transition: var(--transition);
+}
+
+.waterbottle:hover{
+    transform: translateY(150px) rotate(0);
+}
