@@ -74,8 +74,11 @@ const Upload = () => {
 
     return (
         <div>
-        <video ref={videoRef} autoPlay></video>
-        <button onClick={handleCapture}>Capture</button>
+        <image></image>
+        <image></image>
+        <h4 className='photo_h4'>Add a photo to your drift bottle!</h4>
+        <video ref={videoRef} autoPlay className='camera_screen'></video>
+        <button onClick={handleCapture} className='capture_btn'>Capture</button>
         <canvas ref={canvasRef} width="400" height="300" style={{ display: 'none' }}></canvas>
         <img ref={capturedImageRef} />
         </div>

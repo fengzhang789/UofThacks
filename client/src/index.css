@@ -15,7 +15,7 @@
 }
 
 :root {
-    --color-bg: #1f1f38;
+    --color-bg: #053D6A;
     --color-bg-variant: #ffffff34;
     --color-primary: #7ae0ed;
     --color-primary-variant: rgba(77, 181, 255, 0.4);
@@ -110,12 +110,36 @@ a:hover{
 
 }
 
-img{
-    display: block;
-    width: 100%;
-    object-fit:cover;
+/* //////////upload page////////// */
+
+.camera_screen{
+    margin-left: 30%;
+    margin-top: 5%;
+    border-radius: 0.6rem;
+
 }
 
-.errormsg{
+.capture_btn{
+    margin-left: 45%;
+    margin-top: 5%;
+    width: max-content;
+    display: inline-block;
+    background: #fff;
+    padding: 0.75rem 1.2rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    border: 1px solid var(--color-white);
+    transition: var(--transition);
+    color: var(--color-bg);
+    font-size: 2rem;
+}
+
+.capture_btn:hover{
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.photo_h4{
     
 }
