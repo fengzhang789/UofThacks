@@ -5,7 +5,9 @@ import '../Home/Home.css'
 const Home = () => {
     return (
         <div>
-            Home page
+            <button class>Login</button>
+            <h4>Don't have an account? Sign-up here</h4>
+            <img></img>
         </div>
     )
 }
