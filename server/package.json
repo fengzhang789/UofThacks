@@ -3,10 +3,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
-<<<<<<< HEAD
-    "express-openid-connect": "^2.17.1"
-=======
-    "mongoose": "^8.1.1"
->>>>>>> c605b70ab21689f29f9f442b386cf543b7cbeaa1
+    "express-openid-connect": "^2.17.1",
+    "mongoose": "^8.1.1",
+    "nodemon": "^3.0.3"
   }
 }
