@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Bottle/Bottle.css'
+import '../Bottle/bottle.css'
 import Bottle_pic from '../../assets/images/bottle.png'
 import {Link} from 'react-router-dom'
 import Upload from '../Upload'
