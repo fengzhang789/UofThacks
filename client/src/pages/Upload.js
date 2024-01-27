@@ -10,7 +10,7 @@ const Upload = () => {
         <>
             {isAuthenticated ? (
                 <div>
-                    
+                    <input ></input>
                 </div>
             ): (
                 <NotLoggedInPage />

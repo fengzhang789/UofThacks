@@ -1,10 +1,18 @@
-body{
+.bg{
     background: url(../../assets/images/home_bg.mp4);
     background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
 }
 
 .btn {
-  margin-top: 30%;
+  margin-top: 35%;
   margin-left: 64%;
   font-size: 2rem;
   
