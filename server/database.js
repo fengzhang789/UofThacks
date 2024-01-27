@@ -26,8 +26,8 @@ const postSchema = new mongoose.Schema({
     comments: [{user: String, comment: String}]
 });
 
-const post = db.model('post', postSchema);
+const Posts = db.model('post', postSchema);
 // model is a class with which we construct documents
 // each document is a post w/ properties and behaviours as declared in our schema
 
-module.exports = { post };
+module.exports = { Posts };
