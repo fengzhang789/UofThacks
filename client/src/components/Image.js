@@ -35,11 +35,11 @@ const Image = () => {
                     comments: []
                 })
             }
-            fetch(link.concat('/routes/posts/', createdpost).then(result => {
-                console.log(result)
-                // if status of 200 proceed to other ppl's picture/comment page
-                // otherwise produce an error output
-            }))
+            // fetch(link.concat('/routes/posts/', createdpost).then(result => {
+            //     console.log(result)
+            //     // if status of 200 proceed to other ppl's picture/comment page
+            //     // otherwise produce an error output
+            // }))
 
             
         }, error);
