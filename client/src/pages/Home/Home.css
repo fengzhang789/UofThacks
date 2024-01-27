@@ -1,4 +1,21 @@
 body{
-    background: url(../../assets/images/homepage.mp4);
+    background: url(../../assets/images/home_bg.mp4);
     background-size: cover;
+}
+
+.btn1 {
+    top: 28rem;
+    left: 61rem;
+    width: max-content;
+    display: inline-block;
+    color: var(--color-primary);
+    padding: 0.75rem 1.2rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    border: 1px solid var(--color-primary);
+    transition: var(--transition);
+}
+
+.signup_h4{
+
 }
