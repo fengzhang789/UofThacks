@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
+import { useAuth0 } from '@auth0/auth0-react'
 
 const Image = () => {
+    const {isAuthenticated, isLoading, user} = useAuth0()
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const capturedImageRef = useRef(null);
@@ -15,7 +17,38 @@ const Image = () => {
         const tracks = stream.getTracks();
         tracks.forEach(track => track.stop());
         video.srcObject = null;
+        
+        navigator.geolocation.getCurrentPosition((position) => {
+            // send post request??
+            const createdpost = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userid: user.email, 
+                    img:
+                    {
+                        data: Buffer,
+                        contentType: String
+                    },
+                    long: position.coords.longitude,
+                    lat: position.coords.latitude,
+                    comments: []
+                })
+            }
+            fetch(link.concat('/routes/posts/', createdpost).then(result => {
+                console.log(result)
+                // if status of 200 proceed to other ppl's picture/comment page
+                // otherwise produce an error output
+            }))
+
+            
+        }, error);
+
     };
+      
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
 
     const initWebcam = async () => {
         try {
