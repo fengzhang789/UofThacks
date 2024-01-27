@@ -6,7 +6,7 @@ const LogoutButton = () => {
 
   return (
     <React.Fragment>
-      <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+      <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin }})}>
         Log Out
       </button>
     </React.Fragment>
