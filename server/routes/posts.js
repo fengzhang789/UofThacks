@@ -13,8 +13,12 @@ router.get('/', (req, res) => {
 // in request, pass in longitude, latitutde 
 router.get('/location', (req, res) => {
     const rad = 50; // long/lat degrees
+    //const maxlong = Math.sqrt(rad*rad + lat*lat) 
+    //const maxlat = Math.sqrt(rad*rad + lat*lat) 
     Posts.find({long : {$lte: req.long + rad, $gte: req.long - rad}}, {lat: {$lte: req.lat + rad, $gte: req.lat - rad}}).then(posts => {
-        response.json(posts)
+        response.json(posts).then(res => {
+            console.log(res)
+        })
     })
 })
 
@@ -40,7 +44,7 @@ router.post('/', (req, res) => {
 
     const post = new Posts({
         userid: body.userid,
-        image: body.image, 
+        img: body.img, 
         long: body.long,
         lat: body.lat,
         date: body.date,

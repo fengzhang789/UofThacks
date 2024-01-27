@@ -20,7 +20,11 @@ db.on('error', err => {
 
 const postSchema = new mongoose.Schema({
     userid: String,
-    image: String, // how to store image?
+    img:
+    {
+        data: Buffer,
+        contentType: String
+    },
     long: Number,
     lat: Number,
     date: {type: Date, default: Date.now},
