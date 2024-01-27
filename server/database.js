@@ -10,7 +10,13 @@ const password = process.env.DATABASE_PASSWORD;
 
 const uri = `mongodb+srv://${username}:${password}@uofthackcluster.8qv5xpm.mongodb.net/?retryWrites=true&w=majority`
 
-mangoose.connect(uri);
+mongoose.connect(uri);
+
+var db = mongoose.connection;
+
+db.on('error', err => {
+    logError(err);
+});
 
 const postSchema = new mongoose.Schema({
     userid: String,
@@ -20,7 +26,7 @@ const postSchema = new mongoose.Schema({
     comments: [{user: String, comment: String}]
 });
 
-const post = mongoose.model('post', postSchema);
+const post = db.model('post', postSchema);
 // model is a class with which we construct documents
 // each document is a post w/ properties and behaviours as declared in our schema
 
