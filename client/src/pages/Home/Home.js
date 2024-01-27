@@ -3,10 +3,11 @@ import {Link} from 'react-router-dom'
 import '../Home/Home.css'
 
 
+
 const Home = () => {
     return (
-        <div>
-            <Link> 
+        <div className='bg'>
+            <Link to="/Bottle"> 
             <button className='btn'>Throw a drift bottle!</button>
             </Link>
             
