@@ -8,11 +8,8 @@ const Home = () => {
     return (
         <div className='bg'>
             <Link to="/Bottle"> 
-            <button className='btn'>Throw a drift bottle!</button>
+                <button className='btn'>Throw a drift bottle!</button>
             </Link>
-            
-            
-            
         </div>
     )
 }
