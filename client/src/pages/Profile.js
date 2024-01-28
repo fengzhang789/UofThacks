@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
 import NotLoggedInPage from './NotLoggedInPage';
 
+let read = false;
+
 const Profile = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
+    const [ userData, setUserData ] = useState(null)
+
+    const fetchData = () => {
+        fetch(`http://localhost:5000/profile/${user.email}`, {
+            method: "POST",
+        }).then(res => res.json()).then(res => setUserData(res))
+    }
+
+    if (user !== undefined && read === false) {
+        fetchData()
+        read = true;
+    }
+        
     
     return (
         <main>
@@ -19,27 +34,20 @@ const Profile = () => {
                     </div>
                     
                     {/* REPLACE LATER WITH REAL DATA */}
+                    
                     <div className='image-container flex flex-row flex-wrap gap-x-10 justify-center'>
-                        <div className='py-8'>
-                            <h3 className=''>Image</h3>
-                            <img src='https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg' alt='bottled card'></img>
-                            <p>Date Taken: 2024-01-27 at 13:37 PM</p>
-                            <p>Location: Waterloo, Ontario, Canada</p>
-                        </div>
-
-                        <div className='py-8'>
-                            <h3 className=''>Image</h3>
-                            <img src='https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg' alt='bottled card'></img>
-                            <p>Date Taken: 2024-01-27 at 13:37 PM</p>
-                            <p>Location: Waterloo, Ontario, Canada</p>
-                        </div>
-                        
-                        <div className='py-8'>
-                            <h3 className=''>Image</h3>
-                            <img src='https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg' alt='bottled card'></img>
-                            <p>Date Taken: 2024-01-27 at 13:37 PM</p>
-                            <p>Location: Waterloo, Ontario, Canada</p>
-                        </div>
+                        {userData && (
+                            userData.map((item, index) => {
+                                return (
+                                    <div className='py-8'>
+                                        <h3 className=''>My Image :D</h3>
+                                        <img src={item.img} alt='bottled card'></img>
+                                        <p>Date Taken: {item.date}</p>
+                                        <p>Location: {item.lat}, {item.long}</p>
+                                    </div>
+                                )
+                            })
+                        )}
                     </div>
                 </div>
             ) : (

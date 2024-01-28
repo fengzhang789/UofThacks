@@ -1,57 +1,74 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react'
 import Flower1 from '../assets/images/flower1.png'
 import Flower2 from '../assets/images/flower2.png'
+import axios from 'axios'
 
 const Upload = () => {
     const {isAuthenticated, isLoading, user} = useAuth0()
+    const [fetchedData, setFetchedData] = useState(null)
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const capturedImageRef = useRef(null);
 
-    const handleCapture = () => {
+    const handleCapture = async () => {
         const video = videoRef.current;
         const canvas = canvasRef.current;
         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        capturedImageRef.current.src = canvas.toDataURL('image/png');
+        const convertToBlob = async () => {
+            return new Promise(resolve => {
+                canvas.toBlob(blob => resolve(blob));
+            });
+        }
+    
+        const IMAGE = await convertToBlob();
+        const formData = new FormData();
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(IMAGE)
+
+
+        function getCurrentPosition() {
+            return new Promise((resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(
+                position => resolve(position),
+                error => reject(error)
+              );
+            });
+          }
+        
+        
+        fileReader.onload = async () => {
+            const position = await getCurrentPosition();
+    
+            const latstr = position.coords.latitude.toString();
+            const longstr = position.coords.longitude.toString();
+
+
+            const currDate = new Date()
+            
+            
+            console.log(latstr)
+            formData.append('lat', latstr)
+            formData.append('long', longstr)
+            await formData.append('image', IMAGE, "image.png")
+            await formData.append('userid', user.email)
+            await formData.append('date', currDate)
+
+
+            fetch("http://localhost:5000/posts", {
+                method: "POST",
+                body: formData,
+            }).then(res => res.json())
+            .then(res => setFetchedData(res));            
+        }
+                
         const stream = video.srcObject;
         const tracks = stream.getTracks();
         tracks.forEach(track => track.stop());
         video.srcObject = null;
         
-        navigator.geolocation.getCurrentPosition((position) => {
-            // send post request??
-            let date = new Date()
-            const formData = new FormData()
-            formData.append("userid", user.email)
-            formData.append("file", capturedImageRef.current.src);
-            formData.append("long", position.coords.longitude)
-            formData.append("lat", position.coords.latitude)
-            formData.append("date", date)
-            formData.append("comments", [])
-            const createdpost = {
-                method: 'POST',
-                headers: {}, //{'Content-Type': 'multipart/form-data'},
-                body: formData
-                /*JSON.stringify({
-                    userid: user.email, 
-                    long: position.coords.longitude,
-                    lat: position.coords.latitude,
-                    date: date,
-                    comments: []
-                })*/
-            }
-            fetch("http://localhost:5000/posts", createdpost).then(result => {
-                 console.log(result)
-                 // if status of 200 proceed to other ppl's picture/comment page
-                 // otherwise produce an error output
-            }).catch(error => {
-                console.error('error uploading image:', error)
-            })
-
-            
-        }, error);
+       
 
     };
       
@@ -83,13 +100,16 @@ const Upload = () => {
 
     return (
         <div>
-        <image src={Flower1}></image>
-        <image src={Flower2}></image>
-        <h4 className='photo_h4'>Add a photo to your drift bottle!</h4>
-        <video ref={videoRef} autoPlay className='camera_screen'></video>
-        <button onClick={handleCapture} className='capture_btn'>Capture</button>
-        <canvas ref={canvasRef} width="400" height="300" style={{ display: 'none' }}></canvas>
-        <img ref={capturedImageRef} />
+            <img src={Flower1}></img>
+            <img src={Flower2}></img>
+            <h4 className='photo_h4'>Add a photo to your drift bottle!</h4>
+            <video ref={videoRef} autoPlay className='camera_screen'></video>
+            <button onClick={handleCapture} className='capture_btn'>Capture</button>
+            <canvas ref={canvasRef} width="400" height="300" style={{ display: 'none' }}></canvas>
+            <img ref={capturedImageRef} />
+            {fetchedData && (
+                <img src={fetchedData} ></img>
+            )}
         </div>
     );
 };

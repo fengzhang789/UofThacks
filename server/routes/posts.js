@@ -1,8 +1,7 @@
 const express = require("express")
 const router = express.Router()
 var { Posts } = require('../database')
-const multer = require('multer')
-const upload = multer({ storage: './uploads/' })
+
 
 // get all posts
 router.get('/', (req, res) => {
@@ -14,7 +13,7 @@ router.get('/', (req, res) => {
 // get posts by location
 // in request, pass in longitude, latitutde 
 router.get('/location', (req, res) => {
-    const rad = 50; // long/lat degrees
+    const rad = 1; // long/lat degrees
     //const maxlong = Math.sqrt(rad*rad + lat*lat) 
     //const maxlat = Math.sqrt(rad*rad + lat*lat) 
     Posts.find({long : {$lte: req.long + rad, $gte: req.long - rad}}, {lat: {$lte: req.lat + rad, $gte: req.lat - rad}}).then(posts => {
@@ -35,28 +34,27 @@ router.get('/location', (req, res) => {
 */
 
 // create post
-router.post('/', upload.single('file'), (req, res) => {
-    console.log(req.body)
-    console.log(req.file)
+router.post('/', async (req, res) => {
     // creating and saving new user
-    const body = req.body;
+    const body = await req.body;
+    console.log(body)
 
-    const post = new Posts({
-        userid: body.userid,
-        img: {
-            data: file.buffer,
-            contentType: file.mimetype
-        },
-        long: body.long,
-        lat: body.lat,
-        date: body.date,
-        comments: body.comments || []
-    })
+    // const post = new Posts({
+    //     userid: body.userid,
+    //     img: {
+    //         data: file.buffer,
+    //         contentType: file.mimetype
+    //     },
+    //     long: body.long,
+    //     lat: body.lat,
+    //     date: body.date,
+    //     comments: body.comments || []
+    // })
 
-    post.save().then(result => {
-        console.log('post saved')
-        res.json(result)
-    })
+    // post.save().then(result => {
+    //     console.log('post saved')
+    //     res.json(result)
+    // })
 })
 
 router.route("/:id").get((req, res) => {

@@ -3,34 +3,53 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 var logger = require('morgan');
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const multer = require('multer');
+const upload = multer(); 
+const bodyParser = require('body-parser')
+const bufferProcess = require("buffer-to-data-url")
+var { Posts } = require('./database.js')
 
 const app = express()
 const port = 5000
 
 app.use(cors())
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit: '10mb'}));
 
-//app.use(express.urlencoded({extended: false}))
-//app.use(express.json())
-/*app.use(cors({
-  origin: 'http://localhost:3000', // Replace with the actual origin of your frontend
-})); */
-
-//const postRouter = require('./routes/posts')
-
-//app.use('/posts', postRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/posts', upload.single('file'), (req, res) => {
-  res.file.then(res => {
-    console.log(res)
+// UPLOAD AN IMAGE TO MONGODB
+app.post('/posts', upload.single("image"), (req, res) => {
+  // creating and saving new user
+  console.log(req.file)
+  console.log(req.body)
+
+  const imgStr = bufferProcess.default("image/png", req.file.buffer)
+
+  const post = new Posts({
+      userid: req.body.userid,
+      img: imgStr,
+      long: req.body.long,
+      lat: req.body.lat,
+      date: req.body.date,
+      comments: req.body.comments || []
+  })
+
+  post.save().then(result => {
+      console.log('post saved')
+      res.json(result)
+  })
+  // res.send(JSON.stringify(bufferProcess.default("image/png", req.file.buffer)))
+})
+
+app.post('/profile/:id', (req, res) => {
+  console.log("run")
+  Posts.find({userid: req.params.id}).then(post => {
+    console.log(`post: ${post}`)
+    res.send(post)
   })
 })
 

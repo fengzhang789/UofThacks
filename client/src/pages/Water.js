@@ -10,7 +10,6 @@ const Water = () => {
                 <img className='w-screen' src={water} alt='water background'></img>
             </div>
         </>
-       
     )
 }
 

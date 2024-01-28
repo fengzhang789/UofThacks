@@ -9,12 +9,13 @@ import Upload from './pages/Upload'
 import Water from './pages/Water';
 
 function App() {
+
   return (
     <>
       <Navbar />
       <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
           <Route path="/bottle" element={<Bottle />}></Route>
           <Route path="/waves" element={<Waves />}></Route>
           <Route path="/upload" element={<Upload />}></Route>
