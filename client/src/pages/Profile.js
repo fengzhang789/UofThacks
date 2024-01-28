@@ -45,7 +45,19 @@ const Profile = () => {
                                         <img src={item.img} alt='bottled card'></img>
                                         <p>Date Taken: {item.date}</p>
                                         <p>Location: {item.lat}, {item.long}</p>
-                                        <p>Comments: {item.comments.user} says {item.comments.comment}</p>
+                                        <p>Comments: {item.comments.map(com => {
+                                            return (
+                                                <div>
+                                                    {com && (
+                                                        <>
+                                                            {com.comment} says
+                                                            {com.user}
+                                                        </>
+                                                    )}
+                                                    
+                                                </div>
+                                                )
+                                        })}</p>
                                     </div>
                                 )
                             })
