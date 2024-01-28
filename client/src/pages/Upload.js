@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react'
+import Flower1 from '../assets/images/flower1.png'
+import Flower2 from '../assets/images/flower2.png'
 
 const Upload = () => {
     const {isAuthenticated, isLoading, user} = useAuth0()
@@ -74,8 +76,11 @@ const Upload = () => {
 
     return (
         <div>
-        <video ref={videoRef} autoPlay></video>
-        <button onClick={handleCapture}>Capture</button>
+        <image src={Flower1}></image>
+        <image src={Flower2}></image>
+        <h4 className='photo_h4'>Add a photo to your drift bottle!</h4>
+        <video ref={videoRef} autoPlay className='camera_screen'></video>
+        <button onClick={handleCapture} className='capture_btn'>Capture</button>
         <canvas ref={canvasRef} width="400" height="300" style={{ display: 'none' }}></canvas>
         <img ref={capturedImageRef} />
         </div>
