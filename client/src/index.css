@@ -140,3 +140,7 @@ a:hover{
     border-color: var(--color-primary);
 }
 
+.photo_h4{
+    margin-left: 43%;
+    transform: translateY(40px)
+}
