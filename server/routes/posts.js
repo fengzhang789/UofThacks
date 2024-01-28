@@ -1,11 +1,13 @@
 const express = require("express")
 const router = express.Router()
 var { Posts } = require('../database')
+const multer = require('multer')
+const upload = multer({ storage: './uploads/' })
 
 // get all posts
 router.get('/', (req, res) => {
     Posts.find({}).then(posts => {
-        response.json(posts)
+        res.json(posts)
     })
 })
 
@@ -33,18 +35,18 @@ router.get('/location', (req, res) => {
 */
 
 // create post
-router.post('/', (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
     console.log(req.body)
+    console.log(req.file)
     // creating and saving new user
     const body = req.body;
 
-    if (body.content === undefined) {
-        return response.status(400).json({error: 'content missing'})
-    }
-
     const post = new Posts({
         userid: body.userid,
-        img: body.img, 
+        img: {
+            data: file.buffer,
+            contentType: file.mimetype
+        },
         long: body.long,
         lat: body.lat,
         date: body.date,
@@ -53,7 +55,7 @@ router.post('/', (req, res) => {
 
     post.save().then(result => {
         console.log('post saved')
-        response.json(result)
+        res.json(result)
     })
 })
 
@@ -66,7 +68,7 @@ router.route("/:id").get((req, res) => {
     // Add comment to post with id
     Posts.findById(req.params.id).then(post => {
         
-        const newComments = [... post.comments, body.comments] 
+        const newComments = [... post.comments, req.body.comments] 
         post.comments = newComments;
         
         post.save().then(result => {
@@ -76,8 +78,9 @@ router.route("/:id").get((req, res) => {
     })    
 }).delete((req, res) => {
     // Delete post with id
-    Posts.deleteOne({id: req.params.id}).then((result) => {
+    Posts.deleteOne({ _id: req.params.id}).then((result) => {
         console.log(result);
     })
 })
 
+module.exports = router

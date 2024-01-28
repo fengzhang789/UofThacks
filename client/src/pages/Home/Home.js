@@ -6,7 +6,7 @@ import NotLoggedInPage from '../NotLoggedInPage';
 
 
 const Home = () => {
-    const { user, isAuthenticated} = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
 
     return (
         <div className='bg'>
@@ -20,9 +20,7 @@ const Home = () => {
                 <div>
                     <NotLoggedInPage />
                 </div>
-                
             )}
-            
         </div>
     )
 }

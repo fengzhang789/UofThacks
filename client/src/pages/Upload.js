@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react'
+import Flower1 from '../assets/images/flower1.png'
+import Flower2 from '../assets/images/flower2.png'
 
 const Upload = () => {
     const {isAuthenticated, isLoading, user} = useAuth0()
@@ -20,26 +22,33 @@ const Upload = () => {
         
         navigator.geolocation.getCurrentPosition((position) => {
             // send post request??
+            let date = new Date()
+            const formData = new FormData()
+            formData.append("userid", user.email)
+            formData.append("file", capturedImageRef.current.src);
+            formData.append("long", position.coords.longitude)
+            formData.append("lat", position.coords.latitude)
+            formData.append("date", date)
+            formData.append("comments", [])
             const createdpost = {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
+                headers: {}, //{'Content-Type': 'multipart/form-data'},
+                body: formData
+                /*JSON.stringify({
                     userid: user.email, 
-                    img:
-                    {
-                        data: Buffer,
-                        contentType: String
-                    },
                     long: position.coords.longitude,
                     lat: position.coords.latitude,
+                    date: date,
                     comments: []
-                })
+                })*/
             }
-            // fetch(link.concat('/routes/posts/', createdpost).then(result => {
-            //     console.log(result)
-            //     // if status of 200 proceed to other ppl's picture/comment page
-            //     // otherwise produce an error output
-            // }))
+            fetch("http://localhost:5000/posts", createdpost).then(result => {
+                 console.log(result)
+                 // if status of 200 proceed to other ppl's picture/comment page
+                 // otherwise produce an error output
+            }).catch(error => {
+                console.error('error uploading image:', error)
+            })
 
             
         }, error);
@@ -74,8 +83,11 @@ const Upload = () => {
 
     return (
         <div>
-        <video ref={videoRef} autoPlay></video>
-        <button onClick={handleCapture}>Capture</button>
+        <image src={Flower1}></image>
+        <image src={Flower2}></image>
+        <h4 className='photo_h4'>Add a photo to your drift bottle!</h4>
+        <video ref={videoRef} autoPlay className='camera_screen'></video>
+        <button onClick={handleCapture} className='capture_btn'>Capture</button>
         <canvas ref={canvasRef} width="400" height="300" style={{ display: 'none' }}></canvas>
         <img ref={capturedImageRef} />
         </div>
