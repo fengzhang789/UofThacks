@@ -7,6 +7,7 @@ import Bottle from './pages/Bottle/Bottle';
 import Waves from './pages/Bottle/Waves'
 import Upload from './pages/Upload'
 import Water from './pages/Water';
+import Comments from './pages/Comments';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/waves" element={<Waves />}></Route>
           <Route path="/upload" element={<Upload />}></Route>
           <Route path="/water" element={<Water />}></Route>
+          <Route path="/comments" element={<Comments />}></Route>
       </Routes> 
     </>
   );

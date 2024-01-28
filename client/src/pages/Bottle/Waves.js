@@ -10,20 +10,11 @@ const Waves = () => {
   return (
       <div className="header">
         <div className="content">
-          <div className = 'words'>
-            <div className= 'subtitle'> 
-              click the bottle
-            </div>
-            <div className= 'title'>
-              To add your memories
-            </div>
-          </div>
           <div className = 'bottle'>
             <Link to="/Upload">
               <img src={Bottle_pic} className='waterbottle'></img>
             </Link>
           </div>
-        </div>
         
         {/* waves */}
         <div className="waves">
@@ -31,7 +22,7 @@ const Waves = () => {
             className="waves"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28"
+            viewBox="0 25 150 60"
             preserveAspectRatio="none"
             shapeRendering="auto"
           >
@@ -65,6 +56,7 @@ const Waves = () => {
           </svg>
         </div>
         {/* waves end */}
+      </div>
       </div>
   );
 };
