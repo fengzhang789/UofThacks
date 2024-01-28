@@ -5,10 +5,9 @@ import water from '../assets/images/water.png'
 const Water = () => {
     return (
         <>
-            <img className='absolute ' src={letter} alt='letter bottle'></img>
-            <div className='water-page relative flex flex-col justify-end w-screen h-3/4'>
-                <h1 className='text-center '>YOUR DRIFT BOTTLE IS DROPPED!</h1>
-                <img className='w-full h-fit' src={water} alt='water background'></img>
+            <div className='water-page relative flex flex-col justify-evenly w-screen h-screen'>
+                <h1 className='text-center text-6xl relative top-24 px-52'>YOUR DRIFT BOTTLE IS DROPPED!</h1>
+                <img className='w-screen' src={water} alt='water background'></img>
             </div>
         </>
        
