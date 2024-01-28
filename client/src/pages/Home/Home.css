@@ -1,3 +1,58 @@
+.bg{
+    /* background: url(../../assets/images/home_bg.mp4); */
+    /* background-size: cover; */
+    /* position: fixed; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+}
+
+.words{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3%;
+}
+
+.title {
+  text-align: center;
+  font-family: 'PPGBold', sans-serif;
+  font-size: 5rem;
+}
+
+.slogan {
+  text-align: center;
+  font-family: 'PPGUltraLight', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 5%;
+}
+
+.btn {
+  /* margin-top: 35%;
+  margin-left: 64%; */
+  font-size: 1.5rem;
+  
+}
+
+@font-face {
+  font-family: 'PPGBold'; 
+  src: url('../../assets/fonts/PPGatwick-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'PPGUltraLight'; 
+  src: url('../../assets/fonts/PPGatwick-Ultralight.otf') format('opentype');
+}
+
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 * {
   margin: 0;
@@ -56,6 +111,7 @@ section {
   background: #ffffff;
 }
 .sec h2 {
+  font-family: 'PPGBold', sans-serif;
   font-size: 3em;
   color: #111;
 }
@@ -63,26 +119,3 @@ section {
   font-size: 1.2em;
   color: #111;
 }
-
-
-.bg{
-    background: url(../../assets/images/home_bg_text.png);
-    background-size: cover;
-    background-position: center -60px;
-    top: 0;
-    left: 0;
-    bottom: 100px;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
-}
-
-.btn {
-  margin-top: 35%;
-  margin-left: 64%;
-  font-size: 2rem;
-  
-}
-

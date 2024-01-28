@@ -7,17 +7,19 @@ const Navbar = () => {
     const {isAuthenticated, isLoading, user} = useAuth0()
 
     return (
-        <div className='navbar flex flex-row justify-between py-8 px-12'>
-            <header>
+        <div className='navbar flex flex-row p-8'>
+            <header className="w-1/2 text-left">
                 ABOT O' WOT
             </header>
-            <nav>
-                {isAuthenticated ? (
-                    <Logout />
-                ) : (
-                    <Login />
-                )}
-            </nav>
+            <div  className="w-1/2 text-right">
+                <nav>
+                    {isAuthenticated ? (
+                        <Logout />
+                    ) : (
+                        <Login />
+                    )}
+                </nav>
+            </div>
         </div>
     )
 }

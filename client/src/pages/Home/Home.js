@@ -3,7 +3,7 @@ import '../Home/Home.css'
 import { useAuth0 } from '@auth0/auth0-react';
 import NotLoggedInPage from '../NotLoggedInPage';
 import React, { useEffect, useRef } from 'react';
-
+import island from '../../assets/images/island.png'
 
 
 const Home = () => {
@@ -31,12 +31,21 @@ const Home = () => {
 
     return (
         <>
-        <div className='bg'>
+        <div>
             {isAuthenticated ? (
-                <div>
-                    <Link to="/Waves"> 
-                        <button className='btn'>Throw a drift bottle!</button>
-                    </Link>
+                <div className='bg'>
+                    <img src={island} className="island" alt="island"/>
+                    <div className = 'words'>
+                        <div className= 'title'> 
+                            ABOT O' WAT
+                        </div>
+                        <div className= 'slogan'>
+                            Where you can let your memories drift...
+                        </div>
+                        <Link to="/Waves"> 
+                            <button className='btn'>Throw a memory bottle!</button>
+                        </Link>
+                    </div>
                 </div>
             ): (
                 <div>
