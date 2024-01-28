@@ -22,15 +22,15 @@ db.on('error', err => {
 
 const postSchema = new mongoose.Schema({
     userid: String,
-    /*img:
+    img:
     {
         data: Buffer,
         contentType: String
-    },*/
+    },
     long: Number,
     lat: Number,
-    //date: {type: Date, default: Date.now},
-    //comments: [{user: String, comment: String}]
+    date: {type: Date, default: Date.now},
+    comments: [{user: String, comment: String}]
 });
 
 const Posts = mongoose.model('post', postSchema);

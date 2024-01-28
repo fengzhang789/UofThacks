@@ -22,6 +22,7 @@ const Upload = () => {
         
         navigator.geolocation.getCurrentPosition((position) => {
             // send post request??
+            let date = new Date()
             const createdpost = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -34,14 +35,15 @@ const Upload = () => {
                     },
                     long: position.coords.longitude,
                     lat: position.coords.latitude,
+                    date: date,
                     comments: []
                 })
             }
-            // fetch(link.concat('/routes/posts/', createdpost).then(result => {
-            //     console.log(result)
-            //     // if status of 200 proceed to other ppl's picture/comment page
-            //     // otherwise produce an error output
-            // }))
+            fetch("http://localhost:5000/posts", createdpost).then(result => {
+                 console.log(result)
+                 // if status of 200 proceed to other ppl's picture/comment page
+                 // otherwise produce an error output
+            })
 
             
         }, error);
