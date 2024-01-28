@@ -15,7 +15,6 @@ const Comments = () => {
                         <p>Leave a comment in someone's bottle!</p>
                     </div>
                     
-                    {/* REPLACE LATER WITH REAL DATA */}
                     <div className='image-container flex flex-row flex-wrap gap-x-10 justify-center'>
                         <Memory/>
                         <Memory/>
