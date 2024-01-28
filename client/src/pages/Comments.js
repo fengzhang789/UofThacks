@@ -12,7 +12,7 @@ const Comments = () => {
     const fetchData = () => {
         fetch(`http://localhost:5000/comments/${user.email}`, {
             method: "POST",
-        }).then(res => res.json()).then(res => console.log(res))
+        }).then(res => res.json()).then(res => setPostData(res))
     }
 
     if (isAuthenticated && !read) {
