@@ -43,6 +43,12 @@
   
 }
 
+.errormsg{
+  font-family: 'PPGBold', sans-serif;
+  font-size: 4rem;
+  padding: 1em;
+}
+
 @font-face {
   font-family: 'PPGBold'; 
   src: url('../../assets/fonts/PPGatwick-Bold.otf') format('opentype');
