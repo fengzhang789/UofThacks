@@ -2,7 +2,8 @@ import React from 'react';
 import './Waves.css'; // Make sure the path is correct
 import '../Bottle/Bottle.css'
 import Bottle_pic from '../../assets/images/bottle.png'
-import Bottle from '../Bottle/Bottle.js'
+import Bottle from './Bottle.js'
+import {Link} from 'react-router-dom'
 
 
 const Waves = () => {
@@ -10,7 +11,9 @@ const Waves = () => {
     <div>
       <div className="header">
         <div className="inner-header flex">
-          <img src={Bottle_pic} className='waterbottle'></img>
+          <Link to="/Upload">
+            <img src={Bottle_pic} className='waterbottle'></img>
+          </Link>
         </div>
         <div className='bg_bottle'>
           

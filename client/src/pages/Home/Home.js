@@ -12,7 +12,7 @@ const Home = () => {
         <div className='bg'>
             {isAuthenticated ? (
                 <div>
-                    <Link to="/Bottle"> 
+                    <Link to="/Waves"> 
                         <button className='btn'>Throw a drift bottle!</button>
                     </Link>
                 </div>
