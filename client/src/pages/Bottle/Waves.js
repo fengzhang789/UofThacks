@@ -8,19 +8,25 @@ import {Link} from 'react-router-dom'
 
 const Waves = () => {
   return (
-    <div>
       <div className="header">
-        <div className="inner-header flex">
-          <Link to="/Upload">
-            <img src={Bottle_pic} className='waterbottle'></img>
-          </Link>
+        <div className="content">
+          <div className = 'words'>
+            <div className= 'subtitle'> 
+              click the bottle
+            </div>
+            <div className= 'title'>
+              To add your memories
+            </div>
+          </div>
+          <div className = 'bottle'>
+            <Link to="/Upload">
+              <img src={Bottle_pic} className='waterbottle'></img>
+            </Link>
+          </div>
         </div>
-        <div className='bg_bottle'>
-          
-          <h1>loolooloooooo</h1>
-        </div>
-
-        <div>
+        
+        {/* waves */}
+        <div className="waves">
           <svg
             className="waves"
             xmlns="http://www.w3.org/2000/svg"
@@ -58,12 +64,8 @@ const Waves = () => {
             </g>
           </svg>
         </div>
+        {/* waves end */}
       </div>
-
-      <div className="content flex">
-        {/* <p>Paragraph here</p> */}
-      </div>
-    </div>
   );
 };
 
