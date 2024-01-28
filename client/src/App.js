@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Navbar from './components/Navbar';
 import Bottle from './pages/Bottle/Bottle';
 import Upload from './pages/Upload'
+import Water from './pages/Water';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/bottle" element={<Bottle />}></Route>
           <Route path="/upload" element={<Upload />}></Route>
+          <Route path="/water" element={<Water />}></Route>
       </Routes> 
     </>
   );
