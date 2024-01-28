@@ -26,7 +26,8 @@ const postSchema = new mongoose.Schema({
     long: Number,
     lat: Number,
     date: {type: Date, default: Date.now},
-    comments: [{user: String, comment: String}]
+    expiryDate: Date,
+    comments: [{user: String, comment: String}],
 });
 
 const Posts = mongoose.model('post', postSchema);

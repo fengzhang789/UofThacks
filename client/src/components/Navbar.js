@@ -12,13 +12,18 @@ const Navbar = () => {
     return (
         <div className='navbar flex flex-row justify-between items-center p-6'>
             <ul className='flex flex-row justify-between items-center'>
-                <img src={flower} className="flex-grow m-5 max-w-10" alt="flower"/>
-                <li className="text-left flex-grow m-5">
+                <img src={flower} className="flex-grow  m-5 max-w-10" alt="flower"/>
+                <li className="text-left flex flex-row mr-5 flex-grow">
                     <Link to='/'>ABOT O' WOT</Link>
                 </li>
-                <li className="text-left flex-grow m-5">
+                <li className="text-left flex-grow m-5 flex flex-row gap-x-5">
                     {isAuthenticated ? (
-                        <Link to='/profile'>Profile</Link>
+                        <>
+                            <Link to='/profile'>Profile</Link>
+                            <Link to="/upload">Upload</Link>
+                            <Link to="/comment">Comment</Link>
+                        </>
+                        
                     ) : (
                         <></>
                     )}
@@ -27,7 +32,9 @@ const Navbar = () => {
             <div  className="text-right flex-grow m-5">
                 <nav>
                     {isAuthenticated ? (
-                        <Logout />
+                        <>
+                            <Logout />
+                        </>
                     ) : (
                         <Login />
                     )}

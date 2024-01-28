@@ -38,7 +38,27 @@ const Upload = () => {
                     error => reject(error)
                   );
                 });
-              }
+            }
+
+            function generateRandomFutureDate() {
+                const currentDate = new Date();
+                let multiplier = 1;
+                if(Math.random() > 0.5) {
+                    multiplier = -1;
+                } else {
+                    multiplier = 1;
+                }
+
+                const randomDays = (Math.floor(Math.random() * 365) + 1) * multiplier;
+            
+                // Calculate the future date by adding the random number of days to the current date
+                const futureDate = new Date(currentDate);
+                futureDate.setDate(currentDate.getDate() + randomDays);
+            
+                return futureDate;
+            }
+            
+            let randomDate = generateRandomFutureDate()
             
             
             fileReader.onload = async () => {
@@ -57,6 +77,7 @@ const Upload = () => {
                 await formData.append('image', IMAGE, "image.png")
                 await formData.append('userid', user.email)
                 await formData.append('date', currDate)
+                await formData.append('expiryDate', randomDate)
     
     
                 fetch("http://localhost:5000/posts", {

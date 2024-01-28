@@ -35,7 +35,8 @@ app.post('/posts', upload.single("image"), (req, res) => {
       long: req.body.long,
       lat: req.body.lat,
       date: req.body.date,
-      comments: req.body.comments || []
+      comments: req.body.comments || [],
+      expiryDate: req.body.expiryDate
   })
 
   post.save().then(result => {

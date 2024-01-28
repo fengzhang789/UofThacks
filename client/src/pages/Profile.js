@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
 import NotLoggedInPage from './NotLoggedInPage';
+import bottle from '../assets/images/letter-bottle.png';
 
-let read = false;
 
 const Profile = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
     const [ userData, setUserData ] = useState(null)
+    const [read, setRead] = useState(false)
 
     const fetchData = () => {
         fetch(`http://localhost:5000/profile/${user.email}`, {
@@ -16,7 +17,7 @@ const Profile = () => {
 
     if (user !== undefined && read === false) {
         fetchData()
-        read = true;
+        setRead(true);
     }
         
     
@@ -30,34 +31,43 @@ const Profile = () => {
                     {userData && (
                         <div className='inline-flex flex-row flex-wrap gap-x-6 justify-center items-center'>
                             <p>Bottles Sent: {userData.length}</p>
-                            <p>Bottles Received: 2</p>
+                            <p>Bottles Received: {userData.length - userData.filter((item) => item.expiryDate > item.date).length}</p>
                         </div>
                     )}
                     
-                    
-                    {/* REPLACE LATER WITH REAL DATA */}
-                    <div className='image-container flex flex-row flex-wrap gap-x-10 justify-center'>
+
+                    <div className='flex flex-row flex-wrap gap-x-16 justify-center'>
                         {userData && (
                             userData.map((item, index) => {
                                 return (
-                                    <div className='py-8'>
-                                        <h3 className=''>My Image :D</h3>
-                                        <img src={item.img} alt='bottled card'></img>
-                                        <p>Date Taken: {item.date}</p>
-                                        <p>Location: {item.lat}, {item.long}</p>
-                                        <p>Comments: {item.comments && item.comments.map(com => {
-                                            return (
-                                                <div>
-                                                    {com && (
-                                                        <>
-                                                            {com.comment} says
-                                                            {com.user}
-                                                        </>
-                                                    )}
-                                                    
-                                                </div>
-                                                )
-                                        })}</p>
+                                    <div key={index} className='py-8 h-fit'>
+                                        <h3 className=''>Past Memory</h3>
+
+                                        {item.expiryDate < item.date ? (
+                                            <>
+                                                <img src={item.img} alt='bottled card'></img>
+                                                <p>Date Taken: {item.date}</p>
+                                                <p>Location: {item.lat}, {item.long}</p>
+                                                <p>Comments: {item.comments && item.comments.map(com => {
+                                                    return (
+                                                        <div>
+                                                            {com && (
+                                                                <>
+                                                                    {com.comment} says
+                                                                    {com.user}
+                                                                </>
+                                                            )}
+                                                            
+                                                        </div>
+                                                        )
+                                                })}</p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <img className='h-72' src={bottle} alt='bottle with letter inside'></img>
+                                            </>
+                                        )}
+                                        
                                     </div>
                                 )
                             })
