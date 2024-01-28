@@ -1,5 +1,5 @@
 # Installation
-cd into `server` and `client` using two terminals, and run `npm start`. Now head over to `localhost:3000`!
+cd into `server` and `client` using two terminals, and run `npm start`. Now head over to `localhost:3000`! Hint: You'll need a `.env` file with `DATABASE_USERNAME` and `DATABASE_PASSWORD` to run this successfully! You'll also need a `SECRET` key, for your Auth0 implementation. The database we used was MongoDB Atlas.
 
 ## ⚡ Inspiration behind ABOT 'O WAT 💡
 The inspiration behind ABOT O'WAT stemmed from the enchanting concept of messages in bottles washing up on beaches, carrying stories and creating a tangible connection between memories and locations. ABOT O'WAT is a a digital platform where users can encapsulate and share their cherished moments in virtual bottles.
