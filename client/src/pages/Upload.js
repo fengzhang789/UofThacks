@@ -54,7 +54,8 @@ const Upload = () => {
                 // Calculate the future date by adding the random number of days to the current date
                 const futureDate = new Date(currentDate);
                 futureDate.setDate(currentDate.getDate() + randomDays);
-            
+                
+                console.log(multiplier)
                 return futureDate;
             }
             

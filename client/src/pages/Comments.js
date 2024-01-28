@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
 import NotLoggedInPage from './NotLoggedInPage';
 import Memory from '../components/Memory';
-let read = false;
 
 
 const Comments = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
     const [ postData, setPostData ] = useState(null)
+    const [read, setRead] = useState(false)
 
     const fetchData = () => {
         fetch(`http://localhost:5000/comments/${user.email}`, {
@@ -16,7 +16,7 @@ const Comments = () => {
     }
 
     if (isAuthenticated && !read) {
-        read = !read 
+        setRead(!read)
         fetchData();
     }
     
