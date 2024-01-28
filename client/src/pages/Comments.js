@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
 import NotLoggedInPage from './NotLoggedInPage';
 import Memory from '../components/Memory';
+let read = false;
+
 
 const Comments = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
+    const [ postData, setPostData ] = useState(null)
+
+    const fetchData = () => {
+        fetch(`http://localhost:5000/comments/${user.email}`, {
+            method: "POST",
+        }).then(res => res.json()).then(res => console.log(res))
+    }
+
+    if (isAuthenticated && !read) {
+        read = !read 
+        fetchData();
+    }
     
     return (
         <main>
@@ -17,14 +31,11 @@ const Comments = () => {
                     
                     {/* REPLACE LATER WITH REAL DATA */}
                     <div className='image-container flex flex-row flex-wrap gap-x-10 justify-center'>
-                        <Memory/>
-                        <Memory/>
-                        <Memory/>
-                        <Memory/>
-                        <Memory/>
-                        <Memory/>
-                        <Memory/>
-                        <Memory/>
+                        {postData && (
+                            postData.map((item, index) => {
+                                return <Memory key={index} post={item} commentingUser={user} picid={item._id} pic={item.img} date={item.date} location={item.location}/>
+                            })
+                        )}
                     </div>
                 </div>
             ) : (

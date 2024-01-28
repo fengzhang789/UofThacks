@@ -46,11 +46,38 @@ app.post('/posts', upload.single("image"), (req, res) => {
 })
 
 app.post('/profile/:id', (req, res) => {
-  console.log("run")
   Posts.find({userid: req.params.id}).then(post => {
     console.log(`post: ${post}`)
     res.send(post)
   })
+})
+
+
+app.post('/comments/:id', (req, res) => {
+  Posts.find().then(post => {
+    const response = post.filter(item => item.userid !== req.params.id)
+    res.send(response)
+  })
+})
+
+
+app.post('/add-comment/:id', (req, res) => {
+  const postId = req.params.id;
+  const { post, comments, commentingUser } = req.body;
+
+  Posts.findByIdAndUpdate(postId, {
+    comments: [...post.comments, {user: commentingUser, comment: comments}]
+  }).then(res => console.log("updated the database!!"))
+  // Posts.findById(req.params.id).then(post => {
+  //   let comment = req.body
+  //   let newPost = new Posts({
+  //     ...req.body.post,
+  //     comments: [...req.body.post.comments, comment]
+  // })
+  // newPost.save().then(result => {
+  //   console.log('comment added')
+  //   res.json(result)
+  //   })
 })
 
 app.listen(port, () => {
