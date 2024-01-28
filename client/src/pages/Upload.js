@@ -23,26 +23,31 @@ const Upload = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             // send post request??
             let date = new Date()
+            const formData = new FormData()
+            formData.append("userid", user.email)
+            formData.append("file", capturedImageRef.current.src);
+            formData.append("long", position.coords.longitude)
+            formData.append("lat", position.coords.latitude)
+            formData.append("date", date)
+            formData.append("comments", [])
             const createdpost = {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
+                headers: {}, //{'Content-Type': 'multipart/form-data'},
+                body: formData
+                /*JSON.stringify({
                     userid: user.email, 
-                    img:
-                    {
-                        data: Buffer,
-                        contentType: String
-                    },
                     long: position.coords.longitude,
                     lat: position.coords.latitude,
                     date: date,
                     comments: []
-                })
+                })*/
             }
             fetch("http://localhost:5000/posts", createdpost).then(result => {
                  console.log(result)
                  // if status of 200 proceed to other ppl's picture/comment page
                  // otherwise produce an error output
+            }).catch(error => {
+                console.error('error uploading image:', error)
             })
 
             

@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
 var { Posts } = require('../database')
+const multer = require('multer')
+const upload = multer({ storage: './uploads/' })
 
 // get all posts
 router.get('/', (req, res) => {
@@ -33,17 +35,21 @@ router.get('/location', (req, res) => {
 */
 
 // create post
-router.post('/', (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
     console.log(req.body)
+    console.log(req.file)
     // creating and saving new user
     const body = req.body;
 
     const post = new Posts({
         userid: body.userid,
-        //img: body.img, 
+        img: {
+            data: file.buffer,
+            contentType: file.mimetype
+        },
         long: body.long,
         lat: body.lat,
-        //date: body.date,
+        date: body.date,
         comments: body.comments || []
     })
 
