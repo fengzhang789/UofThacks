@@ -53,8 +53,8 @@ const Profile = () => {
                                                         <div>
                                                             {com && (
                                                                 <>
-                                                                    {com.comment} says
-                                                                    {com.user}
+                                                                    {com.user} says
+                                                                    {com.comment}
                                                                 </>
                                                             )}
                                                             
