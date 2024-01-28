@@ -4,6 +4,7 @@ import Profile from './pages/Profile';
 import Home from './pages/Home/Home';
 import Navbar from './components/Navbar';
 import Bottle from './pages/Bottle/Bottle';
+import Waves from './pages/Bottle/Waves'
 import Upload from './pages/Upload'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/bottle" element={<Bottle />}></Route>
+          {<Route path="/waves" element={<Waves />}></Route>}
           <Route path="/upload" element={<Upload />}></Route>
       </Routes> 
     </>

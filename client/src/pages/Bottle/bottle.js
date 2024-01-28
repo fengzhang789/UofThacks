@@ -8,7 +8,7 @@ export const Bottle = () => {
   return (
     <div className='bg_bottle'>
       <Link>
-      <img src={Bottle_pic} className='waterbottle'></img>
+        <img src={Bottle_pic} className='waterbottle'></img>
       </Link>
       
     </div>
