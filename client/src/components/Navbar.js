@@ -21,7 +21,7 @@ const Navbar = () => {
                         <>
                             <Link to='/profile'>Profile</Link>
                             <Link to="/upload">Upload</Link>
-                            <Link to="/comment">Comment</Link>
+                            <Link to="/comments">Comment</Link>
                         </>
                         
                     ) : (
