@@ -5,7 +5,7 @@ var { Posts } = require('../database')
 // get all posts
 router.get('/', (req, res) => {
     Posts.find({}).then(posts => {
-        response.json(posts)
+        res.json(posts)
     })
 })
 
@@ -38,22 +38,18 @@ router.post('/', (req, res) => {
     // creating and saving new user
     const body = req.body;
 
-    if (body.content === undefined) {
-        return response.status(400).json({error: 'content missing'})
-    }
-
     const post = new Posts({
         userid: body.userid,
-        img: body.img, 
+        //img: body.img, 
         long: body.long,
         lat: body.lat,
-        date: body.date,
+        //date: body.date,
         comments: body.comments || []
     })
 
     post.save().then(result => {
         console.log('post saved')
-        response.json(result)
+        res.json(result)
     })
 })
 
@@ -66,7 +62,7 @@ router.route("/:id").get((req, res) => {
     // Add comment to post with id
     Posts.findById(req.params.id).then(post => {
         
-        const newComments = [... post.comments, body.comments] 
+        const newComments = [... post.comments, req.body.comments] 
         post.comments = newComments;
         
         post.save().then(result => {
@@ -76,8 +72,9 @@ router.route("/:id").get((req, res) => {
     })    
 }).delete((req, res) => {
     // Delete post with id
-    Posts.deleteOne({id: req.params.id}).then((result) => {
+    Posts.deleteOne({ _id: req.params.id}).then((result) => {
         console.log(result);
     })
 })
 
+module.exports = router
